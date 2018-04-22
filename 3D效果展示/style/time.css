@@ -11,7 +11,7 @@
 #time .left{
     width: 50px;
     height: 100%;
-    border: 1px solid red;
+    border: 1px solid #E44E27;
 }
 #time .left>ul{
     display: flex;
@@ -24,14 +24,14 @@
     width: 2px;
     height: 2px;
     border-radius: 50%;
-    border: 1px solid red;
+    border: 1px solid #E44E27;
 }
 #time .left .t-l-text{
     width: 37px;
     height: 40px;
     margin: 3px auto;
     padding: 3px;
-    background: red;
+    background: #E44E27;
 }
 #time .left .t-l-text p{
     text-align: center;
