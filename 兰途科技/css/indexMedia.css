@@ -1,0 +1,482 @@
+@charset "UTF-8";
+
+/*--900~1200--*/
+@media all and (max-width: 1200px) and (min-width: 900px){
+    /*header部分*/
+    #header .header-content ul.nav1 li{
+        margin: 0 10px;
+    }
+    #header .header-content ul.nav2{
+        display: none;
+    }
+    /*--header 结束--*/
+    /*--banner 开始--*/
+    /*--第一张--*/
+    #banner{
+        height: 450px;
+    }
+    #banner ul.b-img li.b-i-item1 img.b-i-it1-i1{
+        position: absolute;
+        left: 59px;
+        top: 288px;
+        width: 300px;
+        height: 125px;
+    }
+    #banner ul.b-img li.b-i-item1 img.b-i-it1-i2{
+        position: absolute;
+        right: 40px;
+        bottom: 0;
+        width: 500px;
+        height: 388px;
+    }
+    /*--第二张--*/
+    #banner ul.b-img li.b-i-item2 img.b-i-it2-i3{
+        position: absolute;
+        top: 15px;
+        right: 50px;
+        width: 544px;
+        height: 384px;
+    }
+    #banner ul.b-img li.b-i-item2 .item2-combination{
+        position: absolute;
+        left: 50px;
+        bottom: 130px;
+    }
+    /*--第三张--*/
+    #banner ul.b-img li.b-i-item3 img.b-i-it3-i3{
+        position: absolute;
+        left: 33px;
+        bottom: 60px;
+        width: 500px;
+        height: 390px;
+    }
+    #banner ul.b-img li.b-i-item3 .item3-combination{
+        position: absolute;
+        top: 110px;
+        right: 50px;
+    }
+    /*--container banner部分--*/
+    #container .c-banner .c-b-img ul li{
+        width: 144px;
+        height: 236px;
+    }
+    #container .c-banner .c-b-img ul li.mid{
+        width: 216px;
+        height: 354px;
+    }
+    #container .c-banner .c-b-img ul li.slide{
+        width: 180px;
+        height: 295px;
+    }
+    /*--footer 开始--*/
+    #footer{
+        height: 500px;
+    }
+}
+/*--600~900--*/
+@media all and (max-width: 900px) and (min-width: 600px){
+    /*--header部分--*/
+    #header{
+        width: 100%;
+        height: 100px;
+        background-color: #fff;
+        box-shadow: 0px 2px 5px #dddddd;
+    }
+    #header .header-content{
+        width: 75%;
+        height: 100%;
+        margin: 0 auto;
+        text-align: center;
+    }
+    #header .header-content img{
+        display: block;
+        float: none;
+        border: none;
+        width: 132px;
+        height: 37px;
+        margin: 14px auto;
+
+    }
+    #header .header-content ul.nav1{
+        display: none;
+    }
+    #header .header-content ul.nav2{
+        display: block;
+    }
+    #header .header-content ul.nav2 li{
+        display: inline-block;
+        margin: 0 30px;
+        cursor: pointer;
+    }
+    #header .header-content ul.nav2 li.h-c-nav3:hover{
+        color: inherit;
+    }
+    #header .header-content ul.nav2 li.h-c-nav3{
+        position: relative;
+        width: 38px;
+        text-align: left;
+    }
+    #header .header-content ul.nav2 li.h-c-nav3 img{
+        display: block;
+        position: absolute;
+        top: -11px;
+        right: -5px;
+        border: none;
+        width: 20px;
+        height: 15px;
+    }
+    #header .header-content ul.nav2 li.h-c-nav3 #h-c-n3-nav4{
+        position: absolute;
+        top: 25px;
+        left: -36px;
+        display: none;
+        width: 100px;
+        height: 140px;
+        border: 1px solid black;
+        border-radius: 5px;
+        text-align: center;
+    }
+    #header .header-content ul.nav2 li.h-c-nav3 #h-c-n3-nav4 li{
+        margin: 7px auto;
+    }
+    /*--header 结束--*/
+    /*--banner 开始--*/
+    #banner{
+        position: relative;
+        top: 105px;
+        height: 350px;
+    }
+    /*--第一张--*/
+    #banner ul.b-img li.b-i-item1 img.b-i-it1-i1{
+        position: absolute;
+        left: 50%;
+        bottom: 0px;
+        margin-left: -100px;
+        width: 200px;
+        height: 80px;
+    }
+    #banner ul.b-img li.b-i-item1 img.b-i-it1-i2{
+        position: absolute;
+        left: 50%;
+        top: 10px;
+        margin-left: -165px;
+        width: 330px;
+        height: 240px;
+    }
+    /*--第二张--*/
+    #banner ul.b-img li.b-i-item2 img.b-i-it2-i3{
+        position: absolute;
+        top: 45px;
+        right: 10px;
+        width: 370px;
+        height: 270px;
+    }
+    #banner ul.b-img li.b-i-item2 .item2-combination{
+        position: absolute;
+        left: 31px;
+        top: 210px;
+        width: 180px;
+        height: 90px;
+    }
+    #banner ul.b-img li.b-i-item2 .item2-combination img.b-i2-c-img1{
+        width: 100%;
+        height: 13px;
+        margin-bottom: 6px;
+    }
+    #banner ul.b-img li.b-i-item2 .item2-combination img.b-i2-c-img2{
+        width: 100%;
+        height: 19px;
+        margin: 6px 0;
+    }
+    #banner ul.b-img li.b-i-item2 .item2-combination .item2-c-img{
+        margin-top: 6px;
+        width: 100%;
+        height: 23px;
+        border-radius: 5px;
+        background: #B3CD35 url("../images/index/bg2-3.png") no-repeat center center;
+        background-size: 100% 17px;
+    }
+    /*--第三张--*/
+    #banner ul.b-img li.b-i-item3 img.b-i-it3-i3{
+        position: absolute;
+        left: 20px;
+        bottom: 45px;
+        width: 350px;
+        height: 270px;
+    }
+    #banner ul.b-img li.b-i-item3 .item3-combination{
+        position: absolute;
+        top: 110px;
+        right: 50px;
+        width: 200px;
+        height: 100px;
+    }
+    #banner ul.b-img li.b-i-item3 .item3-combination img{
+        height: 16px;
+        margin: 6px;
+    }
+    #banner ul.b-img li.b-i-item3 .item3-c-img{
+        margin: 6px;
+        height: 21px;
+        border-radius: 6px;
+        background: #B3CD35 url("../images/index/bg3-5.png") no-repeat center center;
+        background-size: 95% 95%;
+    }
+    /*--container banner部分--*/
+    #container{
+        top: 100px;
+        height: 690px;
+    }
+    #container .c-banner .c-b-img ul li{
+        width: 144px;
+        height: 238px;
+    }
+    #container .c-banner .c-b-img ul li.slide{
+        width: 180px;
+        height: 295px;
+    }
+    #container .c-banner .c-b-img ul li.mid{
+        width: 216px;
+        height: 354px;
+    }
+    #container .c-banner .c-b-tab{
+        display: none;
+    }
+    /*--footer 开始--*/
+    #footer{
+        top: 100px;
+    }
+    #footer .f-partner-img ul{
+        top: 118px;
+        left: 50%;
+        margin-left: -110px;
+        width: 220px;
+        height: 100%;
+    }
+    #footer .f-partner-img ul li{
+        display: block;
+        margin: 26px 0;
+    }
+    #footer .f-partner-img ul li:nth-child(2) img{
+        margin-left: 50px;
+    }
+    /*--copy 开始--*/
+    #copy{
+        height: 120px;
+    }
+    #copy ul{
+        width: 100%;
+        height: 100%;
+        margin: auto;
+    }
+    #copy ul li{
+        display: block;
+        margin: 15px 0;
+        text-align: center;
+    }
+}
+/*0~600*/
+@media all and (max-width: 600px){
+    /*--header 开始--*/
+    #header{
+        min-width: 417px;
+        width: 100%;
+        height: 100px;
+        background-color: #fff;
+        box-shadow: 0px 2px 5px #dddddd;
+    }
+    #header .header-content{
+        width: 75%;
+        height: 100%;
+        margin: 0 auto;
+        text-align: center;
+    }
+    #header .header-content img{
+        display: block;
+        float: none;
+        border: none;
+        width: 132px;
+        height: 37px;
+        margin: 14px auto;
+
+    }
+    #header .header-content ul.nav1{
+        display: none;
+    }
+    #header .header-content ul.nav2{
+        display: block;
+    }
+    #header .header-content ul.nav2 li{
+        display: inline-block;
+        margin: 0 15px;
+        cursor: pointer;
+    }
+    #header .header-content ul.nav2 li.h-c-nav3:hover{
+        color: inherit;
+    }
+    #header .header-content ul.nav2 li.h-c-nav3{
+        position: relative;
+        width: 38px;
+        text-align: left;
+    }
+    #header .header-content ul.nav2 li.h-c-nav3 img{
+        display: block;
+        position: absolute;
+        top: -11px;
+        right: -5px;
+        border: none;
+        width: 20px;
+        height: 15px;
+    }
+    #header .header-content ul.nav2 li.h-c-nav3 #h-c-n3-nav4{
+        position: absolute;
+        top: 25px;
+        left: -36px;
+        display: none;
+        width: 100px;
+        height: 140px;
+        border: 1px solid black;
+        border-radius: 5px;
+        text-align: center;
+    }
+    #header .header-content ul.nav2 li.h-c-nav3 #h-c-n3-nav4 li{
+        margin: 7px auto;
+    }
+    /*--header 结束--*/
+    /*--banner 开始--*/
+    #banner{
+        position: relative;
+        top: 105px;
+        height: 400px;
+    }
+    /*--第一张--*/
+    #banner ul.b-img li.b-i-item1 img.b-i-it1-i1{
+        position: absolute;
+        left: 50%;
+        bottom: 15px;
+        margin-left: -100px;
+        width: 200px;
+        height: 80px;
+    }
+    #banner ul.b-img li.b-i-item1 img.b-i-it1-i2{
+        position: absolute;
+        left: 50%;
+        top: 10px;
+        margin-left: -165px;
+        width: 330px;
+        height: 240px;
+    }
+    /*--第二张--*/
+    #banner ul.b-img li.b-i-item2 img.b-i-it2-i3{
+        position: absolute;
+        top: 22px;
+        left: 50%;
+        margin-left: -150px;
+        width: 300px;
+        height: 207px;
+    }
+    #banner ul.b-img li.b-i-item2 .item2-combination{
+        position: absolute;
+        left: 50%;
+        bottom: 60px;
+        margin-left: -100px;
+        width: 200px;
+    }
+    #banner ul.b-img li.b-i-item2 .item2-combination img.b-i2-c-img1{
+        height: 14px;
+        margin-bottom: 6px;
+    }
+    #banner ul.b-img li.b-i-item2 .item2-combination img.b-i2-c-img2{
+        height: 14px;
+        margin: 6px 0;
+    }
+    #banner ul.b-img li.b-i-item2 .item2-combination .item2-c-img{
+        margin-top: 6px;
+        height: 26px;
+        border-radius: 5px;
+        background: #B3CD35 url("../images/index/bg2-3.png") no-repeat center center;
+        background-size: 95% 95%;
+    }
+    /*--第三张--*/
+    #banner ul.b-img li.b-i-item3 img.b-i-it3-i3{
+        position: absolute;
+        left: 50%;
+        top: 0px;
+        margin-left: -150px;
+        width: 300px;
+        height: 233px;
+    }
+    #banner ul.b-img li.b-i-item3 .item3-combination{
+        position: absolute;
+        top: 260px;
+        left: 50%;
+        margin-left: -100px;
+        width: 200px;
+        height: 100px;
+    }
+    #banner ul.b-img li.b-i-item3 .item3-combination img{
+        width: 100%;
+        height: 14px;
+        margin: 6px;
+    }
+    #banner ul.b-img li.b-i-item3 .item3-c-img{
+        width: 100%;
+        height: 20px;
+        border-radius: 6px;
+        background: #B3CD35 url("../images/index/bg3-5.png") no-repeat center center;
+        background-size: 95% 95%;
+    }
+    /*--container banner部分--*/
+    #container{
+        top: 100px;
+        height: 690px;
+    }
+    #container .c-banner .c-b-img ul li{
+        width: 180px;
+        height: 295px;
+    }
+    #container .c-banner .c-b-img ul li.slide{
+        width: 180px;
+        height: 295px;
+    }
+    #container .c-banner .c-b-img ul li.mid{
+        width: 180px;
+        height: 295px;
+    }
+    #container .c-banner .c-b-tab{
+        display: none;
+    }
+    /*--footer 开始--*/
+    #footer{
+        top: 100px;
+    }
+    #footer .f-partner-img ul{
+        top: 68px;
+        left: 50%;
+        margin-left: -110px;
+        width: 220px;
+        height: 100%;
+    }
+    #footer .f-partner-img ul li{
+        display: block;
+        margin: 26px 0;
+    }
+    #footer .f-partner-img ul li:nth-child(2) img{
+        margin-left: 50px;
+    }
+    /*--copy 开始--*/
+    #copy{
+        height: 120px;
+    }
+    #copy ul{
+        width: 230px;
+        height: 100%;
+        margin: auto;
+    }
+    #copy ul li{
+        display: block;
+        margin: 15px 0;
+        font-size: 11px;
+        text-align: center;
+    }
+}

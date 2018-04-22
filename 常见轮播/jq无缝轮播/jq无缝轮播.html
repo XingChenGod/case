@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>jq无缝轮播</title>
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+    li {
+        list-style: none;
+    }
+    img{
+        display: block;
+        border: none;
+    }
+    #wrap{
+        position: relative;
+        width: 520px;
+        height: 280px;
+        margin: 10px auto;
+        overflow: hidden;
+    }
+    #wrap ul.pic{
+        width: 1000%;
+        height: 100%;
+        margin-left: -520px;
+    }
+    #wrap ul.pic li{
+        width: 10%;
+        height: 100%;
+        float: left;
+    }
+    #wrap ul.pic li a{
+        display: block;
+    }
+    #wrap ul.tab{
+        position: absolute;
+        bottom: 20px;
+        left: 50%;
+        margin-left: -50px;
+        width: 100px;
+        height: 10px;
+        background: rgba(0,0,0,.3);
+        border-radius: 50px;
+    }
+    #wrap ul.tab li{
+        float: left;
+        width: 10px;
+        height: 10px;
+        margin: 0 5px;
+        border-radius: 50%;
+        background: #ffffff;
+        cursor: pointer;
+    }
+    #btn{
+        display: none;
+        position: absolute;
+        left: 0px;
+        top: 50%;
+        margin-top: -20px;
+        width: 520px;
+        height: 40px;
+    }
+    #btn div.left{
+        float: left;
+    }
+    #btn div.right{
+        float: right;
+    }
+    #btn div{
+        width: 40px;
+        height: 40px;
+        background: rgba(0,0,0,.3);
+        font-size: 20px;
+        color: #ffffff;
+        text-align: center;
+        line-height: 40px;
+        cursor: pointer;
+    }
+    /*动态样式*/
+    #wrap ul.tab li.on{
+        background: #ff631f;
+    }
+</style>
+<body>
+    <div id="wrap">
+        <ul class="pic">
+            <li><a href="#"><img src="img/1.jpg" alt=""></a></li>
+            <li><a href="#"><img src="img/2.jpg" alt=""></a></li>
+            <li><a href="#"><img src="img/3.jpg" alt=""></a></li>
+            <li><a href="#"><img src="img/4.jpg" alt=""></a></li>
+            <li><a href="#"><img src="img/5.jpg" alt=""></a></li>
+        </ul>
+        <ul class="tab">
+            <li class="on"></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+        <div id="btn">
+            <div class="left">
+                &lt;
+            </div>
+            <div class="right">
+                &gt;
+            </div>
+        </div>
+    </div>
+    <script>
+        (function () {
+            var $aTab = $("#wrap .tab li"),
+                $aPic = $("#wrap .pic li"),
+                $oUl = $("#wrap .pic"),
+                $aBtn = $("#btn div"),
+                Width = $("#wrap").width(),
+                length = $aTab.length,
+                index = 0,
+                nowTimer = new Date();
+
+
+            //点击tab
+            $aTab.click(function () {
+                index = $(this).index();
+                fn(index);
+            });
+
+            //做无缝轮播
+            //给首位添加元素
+            $oUl.append($aPic.eq(0).clone());
+            $oUl.prepend($aPic.eq(length-1).clone());
+            //点击btn
+            $aBtn.click(function () {
+               if (new Date() - nowTimer > 300) {
+                   nowTimer = new Date();
+                   var i = $(this).index();
+                   if (i) {
+                       index ++;
+                       fn(index);
+                       index %= length;
+
+                   }else {
+                       index --;
+                       fn(index);
+                       if (index < 0) index = length - 1;
+                   }
+               //console.log(length,index);
+               }
+
+            });
+
+            //自动轮播
+            var Timer = setInterval(auto,2000);
+            function auto() {
+                index ++;
+                fn(index);
+                index %= length;
+            }
+            //hover时候
+            $("#wrap").hover(function () {
+                clearInterval(Timer);
+                $("#btn").css("display" , "block");
+            },function () {
+                Timer = setInterval(auto,2000);
+                $("#btn").css("display" , "none");
+            });
+            //封装
+            function fn(index) {
+                if (index >= length) {
+                    $aTab.eq(0).addClass("on").siblings().removeClass("on");
+                    setTimeout(function () {//经典处理方式，到最后一个的时候运用定时器瞬间返回第一个
+                        $oUl.stop();
+                        setTimeout(function () {
+                            $oUl.css("marginLeft" , -Width+"px");
+                        },17);
+                    },300);
+                } else if (index < 0) {
+                    $aTab.eq(length-1).addClass("on").siblings().removeClass("on");
+                    setTimeout(function () {
+                        $oUl.stop();
+                        setTimeout(function () {
+                            $oUl.css("marginLeft" , -Width*length+"px");
+                        },17);
+                    },300);
+                }
+                $aTab.eq(index).addClass("on").siblings().removeClass("on");
+                $oUl.animate({
+                    "marginLeft" : -Width*(index+1) + "px"
+                },300);
+            }
+        })();
+    </script>
+</body>
+</html>

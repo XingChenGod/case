@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+    ul{
+        display: flex;
+        display: -webkit-flex;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 800px;
+        justify-content: space-around;
+        transform: translate(-50%,-50%);
+    }
+    li {
+        position: relative;
+        padding: 20px;
+        line-height: 1;
+        list-style: none;
+        cursor: pointer;
+        transition: 0.2s all linear;
+    }
+    /*利用伪类*/
+    li::before{
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 100%;
+        width: 0;
+        height: 100%;
+        border-bottom: 2px solid #000000;
+        transition: 0.2s all linear;
+    }
+    li:hover::before {
+        width: 100%;
+        top: 0;
+        left: 0;
+        transition-delay: 0.1s;
+        z-index: -1;/*点击的时候防止点在伪类上*/
+    }
+    li:hover~li:before{/*hover li 时候选择li后面的每一个伪类*/
+        left: 0;
+    }
+    li:active{
+        background: #000;
+        color: #ffffff;
+    }
+</style>
+<body>
+<!--
+*需求分析：
+ *li的宽度是不固定的
+ *从导航的左侧li移向右侧li，下划线同向跟随。同理，另一个方向
+-->
+<ul>
+    <li>不可思议的css</li>
+    <li>导航栏</li>
+    <li>光标下划线跟随</li>
+    <li>PURE CSS</li>
+    <li>Nav Underline</li>
+</ul>
+</body>
+<script>
+    var a = 12304951010;
+    var b = a.toString();
+    //var arr = new Array(b);
+    var Reg = /^0$/;
+
+    var c = Reg.exec(b);
+
+    console.log(c)
+</script>
+</html>

@@ -1,0 +1,69 @@
+#wrap #time{
+    position: absolute;
+    left: 20px;
+    top: 120px;
+    width: 180px;
+    height: 70px;
+    padding: 10px;
+    cursor: pointer;
+    z-index: 99;
+}
+#time .left{
+    width: 50px;
+    height: 100%;
+    border: 1px solid red;
+}
+#time .left>ul{
+    display: flex;
+    width: 48px;
+    height: 14px;
+    justify-content: space-around;
+    align-items: center;
+}
+#time .left>ul li{
+    width: 2px;
+    height: 2px;
+    border-radius: 50%;
+    border: 1px solid red;
+}
+#time .left .t-l-text{
+    width: 37px;
+    height: 40px;
+    margin: 3px auto;
+    padding: 3px;
+    background: red;
+}
+#time .left .t-l-text p{
+    text-align: center;
+    color: white;
+    font-weight: 500;
+}
+#time .right{
+    width: 110px;
+    height: 100%;
+}
+#time .right p{
+    width: 110px;
+    height: 20px;
+    margin: 2px;
+    /*border: 1px solid red;*/
+    text-align: center;
+    color: white;
+}
+#time:hover{
+    border: 1px dotted #ffffff;
+    border-radius: 3px;
+}
+#time .close{
+    display: none;
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    width: 21px;
+    height: 21px;
+    background: url("../img/close2.png") no-repeat center center;
+    cursor: pointer;
+}
+#time:hover .close{
+    display: block;
+}
