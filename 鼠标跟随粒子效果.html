@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>鼠标跟随粒子效果</title>
+</head>
+<body>
+    <div class="app">
+        <canvas id="canvas" width="300" height="300"></canvas>
+        <h3>当前半径：</h3>
+        <input type="text" id="rText">
+        <input type="range" min="1" max="20" id="rRange">
+        <h3>当前速度：</h3>
+        <input type="text" id="speedText">
+        <input type="range" min="1" max="20" id="speedRange">
+    </div>
+    <script>
+        // 主体
+        let canvas = document.getElementById('canvas'), //获取canvas
+            rRange = document.getElementById('rRange'), //大小
+            rText = document.getElementById('rText'),
+            speedRange = document.getElementById('speedRange'), //速度
+            speedText = document.getElementById('speedText'),
+            context = canvas.getContext('2d'),
+            circleArr = [],
+            rValue = +rRange.value,
+            speedValue = +speedRange.value;
+        rText.value = rValue; //赋值显示
+        speedText.value = speedValue;
+
+        // 获取输入值
+        rRange.onchange = function valueChange(e) { //大小
+            rValue = + this.value;
+            rText.value = rValue;
+        };
+
+        speedRange.onchange = function valueChange(e) { //速度
+            speedValue = + this.value;
+            speedText.value = speedValue;
+        };
+
+        function Circle(x, y, size, speed) { //构造函数
+            this.x = x;
+            this.y = y;
+            this.size = size;
+            this.color = getRandomCokor();
+            this.X = getRandom(speed);
+            this.Y = getRandom(speed);
+            circleArr.push(this);
+        }
+
+        Circle.prototype.createCircle = function () { //创建图形
+            context.beginPath();
+            context.arc(this.x, this.y, this.size, 0, 2*Math.PI);
+            context.fillStyle = this.color;
+            context.fill();
+            context.stroke();
+            this && this.move();
+        };
+
+        Circle.prototype.move = function () { //移动
+            this.x += this.X;
+            this.y += this.Y;
+            this.r -= 1;
+            if(this.r <= 0){
+                this.delCircle();
+            }
+        };
+
+        Circle.prototype.delCircle = function () { //删除
+            for (let i = circleArr.length - 1; i >= 0; i--) {
+                if(circleArr[i] === this){
+                    circleArr.splice(i, 1);
+                }
+            }
+        };
+
+        rRange.onchange = function valueChange(e) { //大小改变的时候重新赋值
+            rValue = + this.value;
+            rText.value = rValue;
+        };
+
+        speedRange.onchange = function valueChange(e) { //速度改变的时候重新赋值
+            speedValue = + this.value;
+            speedText.value = speedValue;
+        };
+
+        canvas.onmouseenter = function mousemove(e) {  //鼠标在canvas上移动
+            let circle = new Circle(e.clientX, e.clientY, rValue, speedValue);
+            context.clearRect(0, 0, canvas.width, canvas.height);
+            circleArr.forEach( function(element, index) {
+                element.createCircle();
+            });
+        };
+
+        canvas.onmouseleave = canvas.onmousedown = function mouseDown() {
+            circleArr.length = 0;
+            context.clearRect(0, 0, canvas.width, canvas.height);
+        };
+
+        function getRandomCokor() { //产生随机颜色
+            let colorR = getRandom(255),
+                colorG = getRandom(255),
+                colorB = getRandom(255),
+                rgb = `rgb(${colorR}, ${colorG}, ${colorB})`;
+            return rgb;
+        }
+        function getRandom(num) {
+            return Math.floor( Math.random(0, 1) * (num) + 1);
+        }
+    </script>
+</body>
+</html>
