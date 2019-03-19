@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>两大数相加</title>
+</head>
+<body>
+
+<script>
+    // 123456
+    // 1234
+
+    function add(num1, num2) {
+        var arr1 = (num1 + '').split(''),
+            arr2 = (num2 + '').split(''),
+            cary = 0, // 进位数
+            res = []; // 结果
+
+        var dis = arr1.length - arr2.length;
+
+        if (dis >= 0) {
+            // arr1的长度大于等于arr2
+            for (var i = arr1.length - 1; i >= 0; i --) {
+                var tem = 0;
+                if (i - dis >= 0) {
+                    tem = +arr1[i] + (+arr2[i - dis]) + cary;
+                } else {
+                    tem = +arr1[i] + cary;
+                }
+                if (tem >= 10) {
+                    cary = 1;
+                    res.unshift(tem - 10);
+                } else {
+                    cary = 0;
+                    res.unshift(tem);
+                }
+            }
+        } else {
+            dis = Math.abs(dis);
+            // arr2的长度大于arr1
+            for (var j = arr2.length - 1; j >= 0; j --) {
+                var tem1 = 0;
+                if (j - dis >= 0) {
+                    tem1 = +arr2[j] + (+arr1[j - dis]) + cary;
+                } else {
+                    tem1 = +arr2[j] + cary;
+                }
+                if (tem1 >= 10) {
+                    cary = 1;
+                    res.unshift(tem1 - 10);
+                } else {
+                    cary = 0;
+                    res.unshift(tem1);
+                }
+            }
+        }
+
+        return res.join('') * 1;
+    }
+
+    console.log(add(123456, 123456));
+</script>
+
+</body>
+</html>
