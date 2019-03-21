@@ -1,0 +1,40 @@
+.reset{
+  right: 20px;
+  cursor: pointer;
+}
+
+.scheduling-data{
+  padding: 0 10px;
+
+  .table{
+    thead{
+      .triangle{
+        display: inline-block;
+        width: 0;
+        height: 0;
+        margin-left: 2px;
+        vertical-align: middle;
+        border-top: 12px dashed;
+        border-right: 12px solid transparent;
+        border-left: 12px solid transparent;
+        cursor: pointer;
+      }
+
+      .triangle-left{
+        left: 142px;
+        top: 30px;
+        transform: rotateZ(90deg);
+      }
+
+      .triangle-right{
+        right: 20px;
+        top: 30px;
+        transform: rotateZ(-90deg);
+      }
+
+      th:nth-of-type(1){
+        border-right: 1px solid #ddd !important;
+      }
+    }
+  }
+}

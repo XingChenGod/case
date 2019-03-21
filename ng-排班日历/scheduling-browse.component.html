@@ -1,0 +1,36 @@
+<div class="scheduling-browse">
+  <div class="page-header">
+    <h3 class="text-center relative">
+      人员排班情况一览表
+      <span>{{currentYear}}</span>
+      <span class="fa fa-calendar reset absolute" (click)="resetScheduling()">
+        排班日历
+      </span>
+    </h3>
+  </div>
+  <!-- 排班表 -->
+  <div class="scheduling-data relative">
+    <div class="table">
+      <table class="table table-striped table-bordered table-hover">
+        <thead class="relative">
+          <span class="triangle absolute triangle-left"
+                (click)="preData()"></span>
+          <tr>
+            <th style="text-align: center;">姓名</th>
+            <th *ngFor="let item of tHeads;" style="text-align: center;">
+              <div>{{item.week}}</div>
+              <div>{{item.date}}</div>
+            </th>
+          </tr>
+          <span class="triangle absolute triangle-right"
+                (click)="nextData()"></span>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of tbodyData;">
+            <th *ngFor="let val of item" style="text-align: center;">{{val}}</th>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
