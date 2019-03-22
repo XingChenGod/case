@@ -51,6 +51,7 @@
 
         Circle.prototype.createCircle = function () { //创建图形
             context.beginPath();
+            context.strokeStyle = this.color;
             context.arc(this.x, this.y, this.size, 0, 2*Math.PI);
             context.fillStyle = this.color;
             context.fill();
@@ -61,8 +62,8 @@
         Circle.prototype.move = function () { //移动
             this.x += this.X;
             this.y += this.Y;
-            this.r -= 1;
-            if(this.r <= 0){
+            this.size -= 0.5;
+            if(this.size <= 0){
                 this.delCircle();
             }
         };
@@ -85,7 +86,7 @@
             speedText.value = speedValue;
         };
 
-        canvas.onmouseenter = function mousemove(e) {  //鼠标在canvas上移动
+        canvas.onmousedown = function mousemove(e) {  //鼠标在canvas上移动
             let circle = new Circle(e.clientX, e.clientY, rValue, speedValue);
             context.clearRect(0, 0, canvas.width, canvas.height);
             circleArr.forEach( function(element, index) {
@@ -93,7 +94,7 @@
             });
         };
 
-        canvas.onmouseleave = canvas.onmousedown = function mouseDown() {
+        canvas.onmouseleave = function mouseDown() {
             circleArr.length = 0;
             context.clearRect(0, 0, canvas.width, canvas.height);
         };
