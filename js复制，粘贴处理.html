@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>复制，粘贴处理</title>
+</head>
+<body>
+<input type="tel" name="">
+<textarea name="" cols="30" rows="10"></textarea>
+155-7662-8611
+<script>
+    // 针对输入框的粘贴处理,提高用户体验，手机号码，邮箱
+    // https://www.zhangxinxu.com/wordpress/2018/09/js-clipboard-api-paste-input/
+
+    [].slice.call(document.querySelectorAll('input, textarea')).forEach(ele => {
+        ele.addEventListener('paste', (event) => {
+            // 输入类型
+            let type = ele.getAttribute('type') || ele.type;
+            // 剪贴板数据
+            let clipboardData = event.clipboardData || window.clipboardData;
+            // 粘贴数据
+            let paste = '';
+            // 剪贴板获取不了
+            if (!clipboardData) {return}
+            // 获取选中的文本内容
+            let textSelected = '';
+            if (window.getSelection) { // 选中复制
+                // 现代浏览器
+                // 直接window.getSelection().toString()对于IE的输入框无效
+                textSelected = ele.value.slice(ele.selectionStart, ele.selectionEnd);
+            } else if (document.selection) {
+                // 旧IE浏览器
+                textSelected = document.selection.createRange().text;
+            }
+            console.log(textSelected);
+            // 只有输入框没有数据，或全选状态才处理
+            if (ele.value.trim() === '' || textSelected === this.value) {
+                // 阻止冒泡和默认粘贴行为
+                event.preventDefault();
+                event.stopPropagation();
+                // 获取粘贴数据
+                paste = clipboardData.getData('text') || '';
+                // 进行如下处理
+                // 除非是password，其他都过滤前后空格
+                if (type !== 'password') {
+                    paste = paste.trim();
+                }
+                // 邮箱处理，可能会使用#代替@避免被爬虫抓取
+                if (type === 'email') {
+                    paste = paste.replace('#', '@');
+                } else if (type === 'tel') {
+                    // 手机号处理
+                    paste = paste.replace(/^\(\+86\)/, '');
+                    // 如果此时剩余所有数字正好11位
+                    if (paste.match(/\d/) && paste.match(/\d/g).length === 11) {
+                        paste = paste.replace(/\D/g, '');
+                    }
+                } // 其他类型处理大家自行补充...
+
+                // 插入
+                ele.value = paste;
+            }
+        });
+    });
+</script>
+</body>
+</html>
