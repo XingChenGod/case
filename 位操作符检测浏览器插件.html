@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>位操作符检测浏览器插件</title>
+</head>
+<body>
+<script>
+    // ~ 按位非，num1 = ~num 相当于  -num - 1；
+    // & 按位与，32位对齐，每位执行and操作，1&&1=1, 0&&0=0，1&&0=0
+    // | 按位或，32位对齐，每位执行or操作，1&&1=1, 0&&0=0，1&&0=1
+    // << 左移操作符，例如， 如果将数值 2（二进制码为 10）向左移动 5位，结果就是 64（二进制码为 1000000
+    // >> 右移操作符，有符号的右移操作与左移操作恰好相反
+
+    // let num = 1,
+    //     num1 = num << 30;
+    //
+    // console.log(num1);
+
+    // 非IE检测插件
+    function hasPlugins(name) {
+        name = name.toLowerCase();
+        for (let i = 0; i < navigator.plugins.length; i ++) {
+            if (navigator.plugins[i].name.toLowerCase().indexOf(name) > -1) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    console.log(hasPlugins('Flash'));
+
+    //检测 IE中的插件
+    function hasIEPlugin(name) {
+        try {
+            new ActiveXObject(name);
+            return true;
+        } catch (ex){
+            return false;
+        }
+    }
+</script>
+</body>
+</html>
