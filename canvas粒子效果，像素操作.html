@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>canvas粒子效果，像素操作</title>
+</head>
+<body>
+    <canvas id="drawing" width="1000" height="666"></canvas>
+    <script>
+        let img = new Image(),
+            // 存储像素点
+            pixels = [],
+            imgData;
+
+        let drawing = document.getElementById('drawing'),
+            context = drawing.getContext('2d');
+
+        img.src = './assets/leaf.jpg';
+
+        img.width = 500;
+        img.height = 333;
+        img.onload = function () {
+          context.drawImage(this, (drawing.width - img.width) / 2, (drawing.height - img.height) / 2, img.width, img.height);
+          imgData = context.getImageData((drawing.width - img.width) / 2, (drawing.height - img.height) / 2, img.width, img.height);
+          console.log(imgData);
+          getPixels();
+          drawPixels();
+        };
+        
+        function getPixels() {
+            let pos = 0,
+                data = imgData.data;
+            for (let i = 1; i <= img.width; i ++) {
+                for (let j = 1; j <= img.height; j ++) {
+                    pos = ((i - 1) * img.width + (j - 1)) * 4;
+                    if (data[pos] >= 0) {
+                        let pixel = {
+                            x: (drawing.width - img.width) / 2 + j + Math.random() * 5,
+                            y: (drawing.height - img.height) / 2 + i + Math.random() * 5,
+                            fillStyle: `rgba(${data[pos]}, ${data[pos + 1]}, ${data[pos + 2]}, ${data[pos + 3]})`
+                        };
+                        pixels.push(pixel);
+                    }
+                }
+            }
+        }
+        
+        function drawPixels() {
+            context.clearRect(0, 0, drawing.width, drawing.height);
+            let len = pixels.length, curr_pixel = null;
+            for (let i = 0; i < len; i ++) {
+                curr_pixel = pixels[i];
+                context.fillStyle = curr_pixel.fillStyle;
+                context.fillRect(curr_pixel.x, curr_pixel.y, 1, 1);
+            }
+            context.fill();
+        }
+
+    </script>
+
+</body>
+</html>
