@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>防抖与节流</title>
+</head>
+<body>
+    <script>
+        /*
+        * 所谓防抖，就是指触发事件后，就是把触发非常频繁的事件合并成一次去执行。
+        * 即在指定时间内只执行一次回调函数，如果在指定的时间内又触发了该事件，
+        * 则回调函数的执行时间会基于此刻重新开始计算。
+        * */
+
+        let debounce = function (fn, delayTime) {
+            let timeId;
+            return function () {
+                let context = this, args = arguments;
+                timeId && clearTimeout(timeId);
+                timeId = setTimeout(function () {
+                    fn.bind(context, args);
+                }, delayTime);
+            }
+        };
+
+        /*
+        * 所谓节流，是指频繁触发事件时，只会在指定的时间段内执行事件回调，
+        * 即触发事件间隔大于等于指定的时间才会执行回调函数。
+        * */
+        let throttle = (fn, delayTime) => {
+            let _start = Date.now();
+            return function () {
+                let _now = Date.now(),
+                    context = this;
+                if (_now - _start >= delayTime) {
+                    fn.bind(context, arguments);
+                    _start = Date.now();
+                }
+            }
+        }
+    </script>
+</body>
+</html>
