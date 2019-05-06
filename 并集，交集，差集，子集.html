@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+
+    class Sets {
+        constructor() {
+            this.items = {};
+        }
+
+        has(value) {
+            return this.items.hasOwnProperty(value);
+        }
+
+        add(value) {
+            if (!this.has(value)) {
+                this.items[value] = value;
+                return true;
+            }
+            return false;
+        }
+
+        delete(value) {
+            if (!this.has(value)) {
+                delete this.items[value];
+                return true;
+            }
+            return false;
+        }
+
+        clear() {
+            this.items = {}
+        }
+
+        size() {
+            const values = this.values();
+            return values.length;
+        }
+
+        values() {
+            return Object.keys(this.items);
+        }
+    }
+
+    // 并集
+    Sets.prototype.union = function (otherSet) {
+        let result = new Sets(),
+            current = this.values(),
+            other = otherSet.values();
+        for (let i = 0;i < current.length;i ++) {
+            result.add(current[i]);
+        }
+        for (let i = 0;i < other.length;i ++) {
+            result.add(other[i]);
+        }
+        return result;
+    }
+
+    // 交集
+    Sets.prototype.intersection = function (otherSet) {
+        let result = new Sets(),
+            current = this.values();
+        for (let i = 0;i < current.length;i ++) {
+            if (otherSet.has(current[i])) {
+                result.add(current[i])
+            }
+        }
+        return result;
+    }
+    
+    // 差集
+    Sets.prototype.difference = function (otherSet) {
+        let result = new Sets(),
+            current = this.values();
+        for (let i = 0;i < current.length;i ++) {
+            if (!otherSet.has(current[i])) {
+                result.add(current[i]);
+            }
+        }
+        return result;
+    }
+
+    // 子集
+    Sets.prototype.subset = function (otherSet) {
+        let result = new Sets(),
+            current = this.values();
+
+        if (this.size() > otherSet.size()) {
+            return false;
+        }
+        for (let i = 0;i < current.length;i ++) {
+            if (!otherSet.has(current[i])) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    // examples 数组求交集
+    function intersection(arr1, arr2) {
+        let create = function (arr) {
+            let sets = new Sets();
+            arr.map(item => sets.add(item));
+            return sets;
+        };
+        let sets1 = create(arr1),
+            sets2 = create(arr2),
+            result = sets1.intersection(sets2);
+        return result.values();
+    }
+
+    console.log(intersection([1, 2], [1]));
+
+    // 数组实现
+    function arrIntersection(arr1, arr2) {
+        let result = [];
+        for (let i = 0;i < arr1.length;i ++) {
+            if (arr2.indexOf(arr1[i]) >= 0) {
+                result.push(arr1[i]);
+            }
+        }
+
+        return result;
+    }
+
+    console.log(arrIntersection([1, 2], [1, 2]));
+</script>
+</body>
+</html>
