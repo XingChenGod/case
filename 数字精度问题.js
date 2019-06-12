@@ -91,5 +91,3 @@ function toFixed(num, s) {
     des = parseInt(des, 10) / times;
     return des + '';
 }
-
-console.log(toFixed(0.22634, 2));
