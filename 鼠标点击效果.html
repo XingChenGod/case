@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{margin: 0;padding: 0;}
+        body{
+            position: relative;
+        }
+    </style>
+</head>
+<body>
+<script>
+    const oBody = document.querySelector('body');
+    oBody.style.height = document.documentElement.clientHeight + 'px';
+
+    let canvas = document.createElement('canvas');
+        canvas.width = 200;
+        canvas.height = 100;
+        canvas.style.position = 'absolute';
+    const ctx = canvas.getContext('2d');
+    oBody.append(canvas);
+
+    const balls = [];
+
+    function Ball(x, y) {
+        this.x = x;
+        this.y = y;
+        this.color = `rgba(${parseInt(Math.random()*255)}, ${parseInt(Math.random()*255)}, ${parseInt(Math.random()*255)}, ${(Math.random() + 0.1).toFixed(2)})`;
+        this.dx = Math.random() * 2 - 1;
+        this.dy = Math.random() * 2 - 1;
+        this.r = parseInt(Math.random() * 10) + 5;
+        balls.push(this);
+    }
+
+    Ball.prototype.render = function () {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2, true);
+        ctx.fillStyle = this.color;
+        ctx.fill();
+    };
+
+    Ball.prototype.update = function () {
+        this.x += this.dx;
+        this.y += this.dy;
+        this.r -= 0.1;
+    };
+
+    Ball.prototype.die = function () {
+        for (let i = 0; i < balls.length; i ++) {
+            balls[i] && balls[i].r <= 0 && balls.splice(i, 1);
+        }
+    };
+
+    function run() {
+        ctx.clearRect(0, 0, 200, 100);
+        for (let i = 0; i < balls.length; i ++) {
+            balls[i] && balls[i].render();
+            balls[i] && balls[i].update();
+            balls[i] && balls[i].die();
+        }
+        requestAnimationFrame(run);
+    }
+
+    run();
+
+    oBody.addEventListener('click', function (ev) {
+        canvas.style.left = ev.clientX - 100 + 'px';
+        canvas.style.top = ev.clientY - 50 + 'px';
+        for (let i = 0; i < 20; i ++) {
+            new Ball(100, 50);
+        }
+    }, false);
+</script>
+</body>
+</html>
