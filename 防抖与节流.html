@@ -12,15 +12,28 @@
         * 则回调函数的执行时间会基于此刻重新开始计算。
         * */
 
-        let debounce = function (fn, delayTime) {
+        /*
+        * fn 函数
+        * delayTime 延迟时间
+        * immediate 第一次是否立即执行
+        * */
+        let debounce = function (fn, delayTime, immediate) {
             let timeId;
-            return function () {
+            return (function () {
                 let context = this, args = arguments;
                 timeId && clearTimeout(timeId);
-                timeId = setTimeout(function () {
-                    fn.bind(context, args);
-                }, delayTime);
-            }
+                if (immediate) {
+                    let callNow = !timeId;
+                    timeId = setTimeout(() => {
+                        timeId = null;
+                    }, delayTime);
+                    callNow && fn.apply(context, args)
+                } else {
+                    timeId = setTimeout(function () {
+                        fn.bind(context, args);
+                    }, delayTime);
+                }
+            })();
         };
 
         /*
@@ -29,14 +42,14 @@
         * */
         let throttle = (fn, delayTime) => {
             let _start = Date.now();
-            return function () {
+            return (function () {
                 let _now = Date.now(),
                     context = this;
                 if (_now - _start >= delayTime) {
-                    fn.bind(context, arguments);
+                    fn.apply(context, arguments);
                     _start = Date.now();
                 }
-            }
+            })();
         }
     </script>
 </body>
