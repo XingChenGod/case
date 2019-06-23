@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!--<script src="js/canvas-input.js"></script>-->
+    <!--<script src="js/CanvasInput.js"></script>-->
+</head>
+<body>
+
+<div id="app">
+    <h1>MVVM</h1>
+    <div v-text="myText"></div>
+    <div v-text="myBox"></div>
+    <input type="text" v-model="myText">
+    <input type="text" v-model="myBox">
+</div>
+<script>
+    class Vue{
+        constructor(options) {
+            this.options = options;
+            this.$data = options.data;
+            this.$el = document.querySelector(options.el);
+            this._directive = {}; // 存放订阅者
+
+            this.Observer(this.$data);
+            this.Compile(this.$el);
+        }
+        // 劫持数据
+        Observer(data) {
+            for (let key in data) {
+                this._directive[key] = [];
+
+                let val = data[key];
+                const watch = this._directive[key];
+                Object.defineProperty(this.$data, key, {
+                    get() {
+                        return val;
+                    },
+                    set(v) {
+                        if (v !== val) {
+                            val = v;
+                            watch.forEach(w => {
+                                w.update();
+                            })
+                        }
+                    }
+                })
+            }
+        }
+        // 解析指令
+        Compile(el) {
+            const nodes = el.children;
+            // 获取指令
+            for (let i = 0; i < nodes.length; i ++) {
+                const node = nodes[i];
+                if (node.children.length) {
+                    this.Compile(node);
+                }
+                if (nodes[i].hasAttribute('v-text')) {
+                    const key = node.getAttribute('v-text');
+                    this._directive[key] && this._directive[key].push(new Watcher(node, this, key, 'innerText'));
+                }
+                if (nodes[i].hasAttribute('v-model')) {
+                    const key = node.getAttribute('v-model');
+                    this._directive[key] && this._directive[key].push(new Watcher(node, this, key, 'value'));
+                    node.addEventListener('input', () => {
+                        this.$data[key] = node.value;
+                    }, false);
+                }
+            }
+        }
+    }
+
+    // 观察者 更新视图
+    class Watcher {
+        constructor(el, vm, exp, attr) {
+            this.el = el;
+            this.vm = vm;
+            this.exp = exp;
+            this.attr = attr;
+            this.update();
+        }
+
+        update() {
+            this.el[this.attr] = this.vm.$data[this.exp];
+        }
+    }
+</script>
+<script>
+   const app = new Vue({
+       el: '#app',
+       data: {
+           myText: [1, 2, 3],
+           myBox: '777'
+       }
+   });
+
+</script>
+</body>
+</html>
