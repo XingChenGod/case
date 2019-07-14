@@ -1,0 +1,33 @@
+<view>
+  <view class='none text-center line-h-305 font-08 text-gray-9a' wx:if="{{!fileList.length}}">暂无数据</view>
+  <movable-area class="weui-grids m-b-1 clearfix" id="moveArea">
+    <!-- <view class="text-center line-h-305 font-08 text-gray-9a" wx:if="{{oldImgsPathSum.length == 0 && isReadyonly}}">暂无数据</view> -->
+    <block wx:for="{{fileList}}" wx:for-index="idx" wx:key="index" wx:for-item="item">
+      <movable-view class="weui-grid item" data-idx="{{idx}}" direction="none" bindlongpress="longtap" bindtouchstart='touchstart' bindtouchend='touchend' bindtouchmove='touchmove'>
+        <view class="relative block">
+          <view wx:if="{{index <= 4 && !readOnly}}" class="remove-txt absolute" data-idx="{{idx}}" catchtap="delFile">删 除</view>
+          <view wx:if="{{index === 'recycleBin' && !readOnly}}" class='remove-txt absolute' data-idx='{{idx}}' catchtap='reset'>还原</view>
+          <image class='img' src="{{item.imgUrl}}" data-idx="{{idx}}" bindtap="previewImg" 
+            mode='scaleToFill'
+          ></image>
+        </view>
+        <view class='titles' data-idx="{{idx}}" catchtap='editImgTitle' wx:if="{{!item.editing}}">{{item.name}}</view>
+        <input class='imgInput' data-idx='{{idx}}' focus='{{item.editing}}' value='{{item.name}}' wx:if="{{item.editing}}" bindblur='editImgTitleBlur'></input>
+      </movable-view>
+    </block>
+    <movable-view class='moveImg item-cover' x="{{x}}" y="{{y}}" damping="2000" direction="all" disabled="{{}}" hidden="{{hidden}}">
+      <image src='{{choiceFile.imgUrl}}'></image>
+    </movable-view>
+  </movable-area>
+</view>
+
+<!-- 底部按钮 -->
+<view class='menu' wx:if="{{!readOnly}}">
+  <view class='add' wx:if="{{index !== 'recycleBin'}}" bindtap='add'>添加</view>
+  <view class='save' bindtap="save">确定</view>
+</view>
+
+<view class='footer-txt'>深圳估易科技有限公司提供技术支持</view>
+
+<!-- 加水印区域-->
+<canvas id="my-canvas" canvas-id="cameraCanvas" style="width:{{cameraWidth}}px;height:{{cameraHeight}}px;right:{{cameraWidth*4}}px;"></canvas>
